@@ -1,0 +1,16 @@
+---
+title: "Hands On Exercise 01"
+---
+
+Hands On
+
+```{r}
+
+
+pacman::p_load(tidyverse, sf)
+
+mpsz <- st_read(dsn = "./data/geospatial",
+                layer = "MP14_SUBZONE_WEB_PL")
+
+plot(mpsz)
+```

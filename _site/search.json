@@ -12,5 +12,19 @@
     "title": "IS415_GAA",
     "section": "",
     "text": "--- title: “About” ---"
+  },
+  {
+    "objectID": "Hands_On_Ex/Hands-on_Ex01/Hands-on_Ex01.html",
+    "href": "Hands_On_Ex/Hands-on_Ex01/Hands-on_Ex01.html",
+    "title": "Hands On Exercise 01",
+    "section": "",
+    "text": "Hands On\n\npacman::p_load(tidyverse, sf)\n\nmpsz <- st_read(dsn = \"./data/geospatial\",\n                layer = \"MP14_SUBZONE_WEB_PL\")\n\nReading layer `MP14_SUBZONE_WEB_PL' from data source \n  `/Users/shaythuram/Desktop/Geospatial Analytics and Applications/Content/QUARTO SITE/Hands_On_Ex/Hands-on_Ex01/data/geospatial' \n  using driver `ESRI Shapefile'\nSimple feature collection with 323 features and 15 fields\nGeometry type: MULTIPOLYGON\nDimension:     XY\nBounding box:  xmin: 2667.538 ymin: 15748.72 xmax: 56396.44 ymax: 50256.33\nProjected CRS: SVY21\n\nplot(mpsz)\n\nWarning: plotting the first 9 out of 15 attributes; use max.plot = 15 to plot\nall"
+  },
+  {
+    "objectID": "Hands_On_Ex/Hands_On_Ex01/Hands_On_Ex01.html",
+    "href": "Hands_On_Ex/Hands_On_Ex01/Hands_On_Ex01.html",
+    "title": "Hands On Exercise 01",
+    "section": "",
+    "text": "Hands On\n\npacman::p_load(tidyverse, sf)\n\nmpsz <- st_read(dsn = \"./data/geospatial\",\n                layer = \"MP14_SUBZONE_WEB_PL\")\n\nReading layer `MP14_SUBZONE_WEB_PL' from data source \n  `/Users/shaythuram/Desktop/Geospatial Analytics and Applications/Content/QUARTO SITE/Hands_On_Ex/Hands_On_Ex01/data/geospatial' \n  using driver `ESRI Shapefile'\nSimple feature collection with 323 features and 15 fields\nGeometry type: MULTIPOLYGON\nDimension:     XY\nBounding box:  xmin: 2667.538 ymin: 15748.72 xmax: 56396.44 ymax: 50256.33\nProjected CRS: SVY21\n\nplot(mpsz)\n\nWarning: plotting the first 9 out of 15 attributes; use max.plot = 15 to plot\nall"
   }
 ]
