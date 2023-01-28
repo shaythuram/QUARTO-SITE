@@ -2,22 +2,8 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "In Class",
-    "section": "",
-    "text": "Hands On\n\npacman::p_load(tidyverse, sf)\n\nmpsz <- st_read(dsn = \"../data/geospatial\",\n                layer = \"MP14_SUBZONE_WEB_PL\")\n\nReading layer `MP14_SUBZONE_WEB_PL' from data source \n  `/Users/shaythuram/Desktop/Geospatial Analytics and Applications/WEEK 1/data/geospatial' \n  using driver `ESRI Shapefile'\nSimple feature collection with 323 features and 15 fields\nGeometry type: MULTIPOLYGON\nDimension:     XY\nBounding box:  xmin: 2667.538 ymin: 15748.72 xmax: 56396.44 ymax: 50256.33\nProjected CRS: SVY21\n\nplot(mpsz)\n\nWarning: plotting the first 9 out of 15 attributes; use max.plot = 15 to plot\nall"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
     "title": "IS415-GAA",
     "section": "",
     "text": "Welcome to IS415 Geospatial Analytics and Applications.\nThis is the course website of IS415 I study this term. You will find my course work on this website."
-  },
-  {
-    "objectID": "Hands-on_Ex.html",
-    "href": "Hands-on_Ex.html",
-    "title": "In Class",
-    "section": "",
-    "text": "Welcome to IS415 Geospatial Analytics and Applications\nThis is the course website of IS415 I study this term. You will find my course work on this website."
   }
 ]
