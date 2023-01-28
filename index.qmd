@@ -1,16 +1,7 @@
 ---
-title: "In Class"
+title: "IS415-GAA"
 ---
 
-Hands On
+Welcome to IS415 Geospatial Analytics and Applications.
 
-```{r}
-
-
-pacman::p_load(tidyverse, sf)
-
-mpsz <- st_read(dsn = "../data/geospatial",
-                layer = "MP14_SUBZONE_WEB_PL")
-
-plot(mpsz)
-```
+This is the course website of IS415 I study this term. You will find my course work on this website.
