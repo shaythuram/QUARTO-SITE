@@ -3,6 +3,7 @@ title: "Hands On Exercise 01"
 execute: 
   warning: false
 date: "`r Sys.Date()`"
+last-modified: "`r Sys.Date()`"
 ---
 
 ## Data Visualization in R
