@@ -1,11 +1,14 @@
 ---
 title: "Hands On Exercise 01"
+execute: 
+  warning: false
 ---
 
-Hands On
+## Data Visualization in R
 
 ```{r}
 
+#  eval:  false
 
 pacman::p_load(tidyverse, sf)
 
