@@ -1,11 +1,16 @@
 ---
-title: "QUARTO SITE"
+title: "In Class"
 ---
 
-This is a Quarto website.
-
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+Hands On
 
 ```{r}
-1 + 1
+
+
+pacman::p_load(tidyverse, sf)
+
+mpsz <- st_read(dsn = "../data/geospatial",
+                layer = "MP14_SUBZONE_WEB_PL")
+
+plot(mpsz)
 ```
