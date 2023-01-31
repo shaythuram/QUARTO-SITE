@@ -15,7 +15,12 @@ website:
         menu: 
           - text: "In Class Exercise 2"
             href: "./InClass/InClassWeek2/InClass2.html"       
-            
+  
+
+
+  
+  
+
 
     right:
       - href: index.qmd
