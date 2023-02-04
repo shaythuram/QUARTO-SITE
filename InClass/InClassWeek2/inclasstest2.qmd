@@ -1,8 +1,0 @@
-```{r}
-pacman::p_load(sf, tidyverse, funModeling)
-
-
-
-wp_nga <- read_csv("Data/aspatial/WPdx.csv") %>%
-filter(`#clean_country_name` == "Nigeria")
-```

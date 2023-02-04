@@ -100,3 +100,7 @@ ggplot(data = NGA_wp,
   ylab("No. of\nLGAs") +
   theme(axis.title.y=element_text(angle = 0))
 ```
+
+```{r}
+write_rds(NGA_wp, "./Data/NGA_wp.rds")
+```
