@@ -15,10 +15,6 @@ website:
         menu: 
           - text: "In Class Exercise 2"
             href: "./InClass/InClassWeek2/InClass2.html"       
-  
-
-      - text: "In Class Exercise"
-        menu: 
           - text: "In Class Exercise 3"
             href: "./InClass/InClassWeek3/InClass3.html" 
   
