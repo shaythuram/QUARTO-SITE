@@ -22,6 +22,14 @@ website:
           - text: "In Class Exercise 3"
             href: "./InClass/InClassWeek3/InClass3.html"   
   
+      - text: "Take Home Assignment"
+        menu:
+
+
+          - text: "Assignment 1"
+            href: "./Take Home Assignment/TakeHome1.html"  
+
+  
 
 
     right:

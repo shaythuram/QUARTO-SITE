@@ -1,0 +1,30 @@
+```{r}
+pacman::p_load(maptools, sf, raster, spatstat, tmap)
+```
+
+```{r}
+childcare_sf <- st_read("data/child-care-services-geojson.geojson") %>%
+  st_transform(crs = 3414)
+```
+
+```{r}
+sg_sf <- st_read(dsn = "data", 
+                 layer="CostalOutline")
+```
+
+```{r}
+mpsz_sf <- st_read(dsn = "data", 
+                layer = "MP14_SUBZONE_WEB_PL")
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
