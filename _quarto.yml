@@ -24,8 +24,6 @@ website:
   
       - text: "Take Home Assignment"
         menu:
-
-
           - text: "Assignment 1"
             href: "./Take Home Assignment/TakeHome1.html"  
 
