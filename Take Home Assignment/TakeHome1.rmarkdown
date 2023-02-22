@@ -4,9 +4,11 @@ pacman::p_load(sf, funModeling,maptools,raster, spatstat, tmap ,  tidyverse,sfde
 
 ```
 
+
 # Above we have imported all the relevant modules and now we will be importing all the relevant Data.
 
 > Here we are importing the Nigeria adm data and removing any duplicates and filtering our data to only include our area of study, Osun state.
+
 
 ```{r}
 
@@ -34,7 +36,9 @@ NGA$ADM2_EN[duplicated(NGA$ADM2_EN)==TRUE]
 NGA<-NGA %>%filter(`ADM1_EN` == "Osun")
 ```
 
+
 Now we are going to import our Water Point Data and filter it to only include Osun state and applying the right projection system to our data.
+
 
 ```{r}
 wp_nga <- read_csv("./data/aspatial/WPdx.csv") %>%
@@ -45,7 +49,9 @@ wp_sf <- st_sf(wp_nga, crs=4326)
 wp_sf <- wp_sf %>%st_transform(crs = 26392)
 ```
 
+
 Now we remove our "Unknown" values in the #status_clean column and create two sf's called Functional and Non-Functional based on the filterings below.
+
 
 ```{r}
 ```
@@ -78,7 +84,9 @@ wp_nonfunctional <- wp_sf_nga %>%
 
 ```
 
+
 The code chunk below uses as_Spatial() of sf package to convert the three geospatial data from simple feature data frame to sp's Spatial\* class.
+
 
 ```{r}
 NGA_spatial <- as_Spatial(NGA)
@@ -87,9 +95,11 @@ wp_spatial_non_functional <- as_Spatial(wp_nonfunctional)
 
 ```
 
+
 spatstat requires the analytical data in ppp object form. There is no direct way to convert a Spatial\* classes into ppp object. We need to convert the Spatial classes\* into Spatial object first.
 
 The codes chunk below converts the Spatial\* classes into generic sp objects.
+
 
 ```{r}
 
@@ -99,7 +109,9 @@ NGA_sp <- as(NGA_spatial, "SpatialPolygons")
 
 ```
 
+
 Now, we will use as.ppp() function of spatstat to convert the spatial data into spatstat's ppp object format.
+
 
 ```{r}
 
@@ -107,21 +119,27 @@ wp_functional_ppp <- as(wp_sp_functional, "ppp")
 wp_non_functional_ppp <- as(wp_sp_non_functional, "ppp")
 ```
 
+
 Now we check for duplicates
+
 
 ```{r}
 sum(multiplicity(wp_functional_ppp) > 1)
 sum(multiplicity(wp_non_functional_ppp) > 1)
 ```
 
+
 When analysing spatial point patterns, it is a good practice to confine the analysis with a geographical area like Singapore boundary. In spatstat, an object called owin is specially designed to represent this polygonal region. so let's convert NGA into the Owin format'
+
 
 ```{r}
 NGA_owin <- as(NGA_sp, "owin")
 plot(NGA_owin)
 ```
 
+
 In this last step of geospatial data wrangling, we will extract childcare events that are located within Singapore by using the code chunk below.
+
 
 ```{r}
 
@@ -129,16 +147,20 @@ wp_functional_NGA_ppp = wp_functional_ppp[NGA_owin]
 wp_non_functional_NGA_ppp = wp_non_functional_ppp[NGA_owin]
 ```
 
+
 In the code chunk below, rescale() is used to covert the unit of measurement from meter to kilometer.
+
 
 ```{r}
 wp_functional_NGA_ppp <- rescale(wp_functional_NGA_ppp, 1000, "km")
 wp_non_functional_NGA_ppp <- rescale(wp_non_functional_NGA_ppp, 1000, "km")
 ```
 
+
 Now, we can run density() using the resale data set and plot the output kde map\
 
 Here is the KDE map for Functional waterpoints
+
 
 ```{r}
 kde_functional_wpNGA_bw <- density(wp_functional_NGA_ppp,
@@ -152,7 +174,9 @@ plot(kde_functional_wpNGA_bw)
 
 ```
 
+
 Here is the KDE map for Non-Functional Waterpoints.
+
 
 ```{r}
 kde_non_functional_wpNGA_bw <- density(wp_non_functional_NGA_ppp, sigma=bw.diggle, edge=TRUE, kernel="gaussian")
@@ -161,20 +185,24 @@ plot(kde_non_functional_wpNGA_bw)
 gridded_kde_non_functional_wpNGA.bw<- as.SpatialGridDataFrame.im(kde_non_functional_wpNGA_bw)
 ```
 
+
 Now we convert each of the above KDE outputs into grid objects
 
 For Functional Waterpoints :
 
 As shown below we observe spots of highly density areas with Non Functional waterpoints meaning that the distribution of Non Functional Waterpoints in Osun are not randomly distributed.
 
+
 ```{r}
 gridded_kde_functional_wpNGA.bw<- as.SpatialGridDataFrame.im(kde_functional_wpNGA_bw)
 plot(gridded_kde_functional_wpNGA.bw)
 ```
 
+
 For Non Functional Waterpoints :
 
 As shown below we observe spots of highly density areas with Non Functional waterpoints meaning that the distribution of Non Functional Waterpoints in Osun are not randomly distributed.
+
 
 ```{r}
 
@@ -182,11 +210,13 @@ gridded_kde_non_functional_wpNGA.bw<- as.SpatialGridDataFrame.im(kde_non_functio
 plot(gridded_kde_non_functional_wpNGA.bw)
 ```
 
+
 Next, we will convert the gridded kernal density objects into RasterLayer object by using raster() of raster package. Note that we need to re-declare the CRS information as converting our data to OWIN format removed this information.
 
 Only then can we display the raster in cartographic quality map using **tmap** package.
 
 For Non Functional Waterpoints :
+
 
 ```{r}
 
@@ -204,7 +234,9 @@ tm_shape(gridded_kde_non_functional_wpNGA.bw_raster) +
   tm_layout(legend.position = c("right", "bottom"), frame = FALSE)
 ```
 
+
 For Functional Waterpoints :
+
 
 ```{r}
 
@@ -222,7 +254,9 @@ tm_shape(gridded_kde_functional_wpNGA.bw_raster) +
 #Part 1 Done
 ```
 
+
 Now we are going to compute L-function estimation by using [*Lest()*](https://rdrr.io/cran/spatstat/man/Lest.html) of **spatstat** package. W will also how to perform monta carlo simulation test using *envelope()* of spatstat package.\
+
 
 ```{r}
 
@@ -230,6 +264,7 @@ L_osun_functional = Lest(wp_functional_NGA_ppp, correctionc = "Ripley")
 plot(L_osun_functional, . -r ~ r, 
      ylab= "L(d)-r", xlab = "d(km)")
 ```
+
 
 To confirm the observed spatial patterns above, a hypothesis test will be conducted. The hypothesis and test are as follows:
 
@@ -241,6 +276,7 @@ The null hypothesis will be rejected if p-value if smaller than alpha value of 0
 
 The code chunk below is used to perform the hypothesis testing.
 
+
 ```{r}
 L_osun_functional.csr <- envelope(wp_functional_NGA_ppp, Lest, nsim = 39, rank = 1, glocal=TRUE)
 ```
@@ -249,12 +285,15 @@ L_osun_functional.csr <- envelope(wp_functional_NGA_ppp, Lest, nsim = 39, rank =
 plot(L_osun_functional.csr, . - r ~ r, xlab="d", ylab="L(d)-r")
 ```
 
+
 Based on the output of CSR as shown above, the curve is above envelope as such we have enough statisctial evidence to reject the null hypothesis at 95% confidence. Therefore we can say that that the distribution of Functional waterpoints are not randomly distributed with 95% confidence.
+
 
 ```{r}
 L_osun_non_functional = Lest(wp_non_functional_NGA_ppp, correctionc = "Ripley")
 plot(L_osun_non_functional, . -r ~ r, ylab= "L(d)-r", xlab = "d(km)")
 ```
+
 
 To confirm the observed spatial patterns above, a hypothesis test will be conducted. The hypothesis and test are as follows:
 
@@ -266,10 +305,12 @@ The null hypothesis will be rejected if p-value if smaller than alpha value of 0
 
 The code chunk below is used to perform the hypothesis testing.
 
+
 ```{r}
 L_osun_non_functional.csr <- envelope(wp_non_functional_NGA_ppp, Lest, nsim = 39, rank = 1, glocal=TRUE)
 plot(L_osun_non_functional.csr, . - r ~ r, xlab="d", ylab="L(d)-r")
 ```
+
 
 Based on the output of CSR as shown above, the curve is above envelope as such we have enough statisctial evidence to reject the null hypothesis at 95% confidence. Therefore we can say that that the distribution of Non Functional waterpoints are not randomly distributed with 95% confidence.
 
@@ -284,6 +325,7 @@ Advantages of kernel density maps over point maps are as follows:
 4.  Improved readability: Kernel density maps can be easier to read and interpret than point maps, especially when the data is dense or there are many overlapping points. In a kernel density map, the data is represented as a continuous surface, which can make it easier to see patterns and relationships in the data.
 
 For part 3 we are going to reload our wp data as it will require different kind of manipulation from the start. We also need some different modules
+
 
 ```{r}
 pacman::p_load(sf, funModeling,maptools,raster, spatstat, tmap ,  tidyverse,sfdep) 
@@ -302,7 +344,9 @@ wp_sf <- st_sf(wp_nga, crs=4326)
 wp_sf <- wp_sf %>%st_transform(crs = 26392)
 ```
 
+
 We are going to ensure that we only have two types of variables in #status_clean. We will drop those that are not labelled (NA) and then rename the rest to functional and non-functional where appropriate
+
 
 ```{r}
 wp_sf_nga <- wp_sf %>% 
@@ -359,14 +403,18 @@ tm_shape(wp_sf_nga)+
              border.lwd = 0.5) 
 ```
 
+
 In the code chunk below, st_knn() of sfdep package is used to determine the k (i.e. 6) nearest neighbours for given point geometry.
+
 
 ```{r}
 nb <- include_self(
   st_knn(st_geometry(wp_sf_nga), 6))
 ```
 
+
 Computing kernel weights : In the code chunk below, st_kernel_weights() of sfdep package is used to derive a weights list by using a kernel function.
+
 
 ```{r}
 wt <- st_kernel_weights(nb, 
@@ -375,7 +423,9 @@ wt <- st_kernel_weights(nb,
                         adaptive = TRUE)
 ```
 
+
 To compute LCLQ by using sfdep package, the reference point data must be in either character or vector list. The code chunks below are used to prepare two vector lists.One of Functional and for Non-Functional and are called A and B respectively.
+
 
 ```{r}
 Functional <- wp_sf_nga %>%
@@ -390,19 +440,25 @@ NonFunctional <- wp_sf_nga %>%
 B <- NonFunctional$status_clean
 ```
 
+
 In the code chunk below local_colocation() us used to compute the LCLQ values for Functional point event.
+
 
 ```{r}
 LCLQ <- local_colocation(A, B, nb, wt, 39)
 ```
 
+
 Before we can plot the LCLQ values their p-values, we need to join the output of local_colocation() to the stores sf data.frame. However, a quick check of LCLQ data-frame, we can't find any field can be used as the join field. As a result, cbind() of Base R is useed.
+
 
 ```{r}
 LCLQ_wp <- cbind(wp_sf_nga, LCLQ) 
 ```
 
+
 In the code chunk below, tmap functions are used to plot the LCLQ analysis.
+
 
 ```{r}
 
@@ -416,7 +472,9 @@ tm_shape(LCLQ_wp)+
              border.lwd = 0.5) 
 ```
 
+
 In order to conduct leve 2 spatial analysis we need to conver our data to PPP format as shown below
+
 
 ```{r}
 LCLQ_ppp  <- as_Spatial(LCLQ_wp)
@@ -424,6 +482,7 @@ LCLQ_ppp <- as(LCLQ_ppp, "SpatialPoints")
 LCLQ_ppp <- as(LCLQ_ppp, "ppp")
 LCLQ_ppp
 ```
+
 
 H0 = The spatial distribution of functional and non-functional water points are independent from each other.}
 
@@ -433,8 +492,11 @@ The null hypothesis will be rejected if p-value if smaller than alpha value of 0
 
 The code chunk below is used to perform the hypothesis testing.
 
+
 ```{r}
 plot(envelope(LCLQ_ppp, Lest, nsim = 39, rank = 1, glocal=TRUE))
 ```
 
+
 Based on the output of CSR as shown above, the curve is above envelope as such we have enough statisctial evidence to reject the null hypothesis at 95% confidence. he spatial distribution of functional and non-functional water points are not independent from each other with 95% confidence
+
