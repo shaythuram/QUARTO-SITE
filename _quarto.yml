@@ -26,6 +26,8 @@ website:
         menu:
           - text: "Assignment 1"
             href: "./Take Home Assignment/TakeHome1.html"  
+          - text: "Assignment 2"
+            href: "./Take Home Assignment 2/Take-home_Ex02.html"  
 
   
 
