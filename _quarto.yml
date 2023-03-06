@@ -8,15 +8,32 @@ website:
       - text: "Hands-on Exercise"
         menu: 
           - text: "Hand-on Exercise 1"
-            href: "./Hands_On_Ex/Hands_On_Ex01/Hands_On_Ex01.html"
-
-
+            href: "./Hands_On_Ex/Hands-on_Ex01/Hands_On_Ex01.html"      - text: "Hands-on Exercise"
+        menu: 
+          - text: "Hand-on Exercise 2"
+            href: "./Hands_On_Ex/Hands-on_Ex02/Hands_On_Ex02.html"
+        menu: 
+          - text: "Hand-on Exercise 3"
+            href: "./Hands_On_Ex/Hands-on_Ex03/Hands_On_Ex03.html"
+        menu: 
+          - text: "Hand-on Exercise 4"
+            href: "./Hands_On_Ex/Hands-on_Ex04/Hands_On_Ex04.html"     
+        menu: 
+          - text: "Hand-on Exercise 5"
+            href: "./Hands_On_Ex/Hands-on_Ex05/Hands_On_Ex05.html"  
+        menu: 
+          - text: "Hand-on Exercise 6"
+            href: "./Hands_On_Ex/Hands-on_Ex06/Hands_On_Ex06.html"  
+        menu: 
+          - text: "Hand-on Exercise 7"
+            href: "./Hands_On_Ex/Hands-on_Ex07/Hands_On_Ex07.html"              
+        menu: 
+          - text: "Hand-on Exercise 8"
+            href: "./Hands_On_Ex/Hands-on_Ex08/Hands_On_Ex08.html" 
 
             
       - text: "In Class Exercise"
         menu:
-
-
           - text: "In Class Exercise 2"
             href: "./InClass/InClassWeek2/InClass2.html"  
           - text: "In Class Exercise 3"
